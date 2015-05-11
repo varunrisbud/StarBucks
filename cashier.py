@@ -45,7 +45,7 @@ def get_customer_order(custID):
             custheader = {'Content-Type': 'application/json'}
             requests.delete(QueueUrl, data=json.dumps({"itemName": v}), headers=custheader)
     if len(addOrderToQueue) > 0:
-        print("{} will be provided in a while ".format(addOrderToQueue))
+        print("{} {} will be provided in a while ".format(customerName, addOrderToQueue))
         for i, v in enumerate(addOrderToQueue):
             add_orders_for_Barista(customerID, customerName, v)
     else:
