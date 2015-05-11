@@ -14,7 +14,7 @@ q = CustomerQueue()
 def addCustomer(custId):
     if request.method=='POST':
         q.custQueue.put(custId)
-        q.printQ()
+        # q.printQ()
         return jsonify({"status": "customer added successfully"}), 200
 
 

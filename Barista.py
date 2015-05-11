@@ -7,6 +7,14 @@ import requests, json, time
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
+
+def get_time():
+    wallClockURL = 'http://localhost:10001/wallclock'
+    queueResponse = requests.get(wallClockURL).json()
+    # print("Printing time %s" %queueResponse['time'])
+    return queueResponse['time']
+
+
 while(True):
     custQueueUrl = "http://localhost:3000/queue/orderqueue"
     response = requests.delete(custQueueUrl)
@@ -17,13 +25,11 @@ while(True):
         itemName = r['itemName']
 
         time.sleep(randint(3, 6))
-        print("Hey {}, your {} is ready..".format(customerName, itemName))
-        print("Thank you..")
+        print("{} Barista: Hey {}, your {} is ready..".format(get_time(), customerName, itemName))
+        # print("Barista: Thank you..")
         QueueUrl = "http://localhost:4000/customer/" + str(customerId)
         custheader = {'Content-Type': 'application/json'}
         requests.delete(QueueUrl, data=json.dumps({"itemName": itemName}), headers=custheader)
     elif response.status_code == 204:
-        print("Waiting for next order..")
+        # print("Waiting for next order..")
         time.sleep(randint(3, 6))
-    else:
-        print("Server Error!!")

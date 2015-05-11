@@ -28,28 +28,27 @@ def get_customer_order(custID):
     customerID = custDetails['custId']
     customerName = custDetails['customerName']
     customerOrder = custDetails['items']
-    print("Hi, what can I get for you today!")
-    print("Hello, I would like to have ")
+    # removed two print statments
+
     for i, order in enumerate(customerOrder):
-        print(order)
+        # print(order)
         if(order not in quickOrders):
             addOrderToQueue.append(order)
         else:
             provideCoffee.append(order)
     time.sleep(random.randrange(2, 6))
     if len(provideCoffee) > 0:
-        print("Hi %s, here is your " % customerName)
+        print("{} Cashiser: Hi {}, here is your {}".format(get_time(), customerName, provideCoffee))
         for i, v in enumerate(provideCoffee):
-            print(v)
             QueueUrl = "http://localhost:4000/customer/" + str(customerID)
             custheader = {'Content-Type': 'application/json'}
             requests.delete(QueueUrl, data=json.dumps({"itemName": v}), headers=custheader)
     if len(addOrderToQueue) > 0:
-        print("{} {} will be provided in a while ".format(customerName, addOrderToQueue))
+        print("{} Cashier: {} {} will be provided in a while ".format(get_time(), customerName, addOrderToQueue))
         for i, v in enumerate(addOrderToQueue):
             add_orders_for_Barista(customerID, customerName, v)
     else:
-        print("Have a good day! Bye")
+        print("{} Cashier: Have a good day! Bye".format(get_time()))
 
 def get_customer_in_queue():
     custQueueURL = 'http://localhost:5000/removecustomer'
@@ -60,19 +59,18 @@ def get_customer_in_queue():
         # print(custID)
         waitTime = random.randrange(2, 6)
         time.sleep(waitTime)
+        print("{} Cashier: Hi, what can I get for you today!".format(get_time()))
         get_customer_order(custID)
     elif queueResponse.status_code == 204:
-        print("Awaiting customers!!")
-        time.sleep(random.randrange(2, 6))
-    else:
-        print("Server Error!!")
+        # print("Awaiting customers!!")
         time.sleep(random.randrange(2, 6))
 
 
 def get_time():
     wallClockURL = 'http://localhost:10001/wallclock'
     queueResponse = requests.get(wallClockURL).json()
-    print("Printing time %s" %queueResponse['time'])
+    # print("Printing time %s" %queueResponse['time'])
+    return queueResponse['time']
 
 
 print("Cashier Started")

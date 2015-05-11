@@ -6,7 +6,7 @@ import time
 from random import randint
 
 
-order=[["Shaken Sweet Tea","Caffe Latte"],["Fresh Brewed Coffee"],["Caffe Latte","Caffe Mocha","Iced Coffee"],["Iced Coffee"],["Espresso","Iced Coffee"],["Espresso"],["Espresso","Iced Coffee"]]
+order = [["Shaken Sweet Tea", "Caffe Latte", "Caffe Vanilla Light Frappuccino"], ["Fresh Brewed Coffee", "Classic Chai Creme Frappuccino"], ["Caffe Latte", "Caffe Mocha", "Iced Coffee", "Classic Chai Creme Frappuccino"], ["Iced Coffee"], ["Espresso", "Iced Coffee", "Caffe Vanilla Light Frappuccino"], ["Espresso", "Espresso Con Panna"], ["Espresso", "Iced Coffee"], ["Iced Vanilla Latte", "Cappuccino", "Espresso Con Panna"], ["Tiramisu Latte"], ["Hot Chocolate", "Caffe Vanilla Light Frappuccino"], ["Hot Chocolate", "Peppermint Hot Chocolate"]]
 
 def main_loop():
     count = 1

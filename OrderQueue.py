@@ -31,7 +31,7 @@ def queue_order():
 
         neworder = Order(customerid=custid, customername=custname, itemname=itemname)
 
-        neworder.displayOrder()
+        # neworder.displayOrder()
 
         orderQueue.put(neworder)
 
@@ -58,7 +58,7 @@ def queue_order():
 @app.route('/queue/orderqueue', methods=['DELETE'])
 def deque_order():
     if orderQueue.empty():
-        print("No order in queue")
+        # print("No order in queue")
         responsedata = {
             'status': 'No order'
         }
@@ -68,7 +68,7 @@ def deque_order():
 
     else:
         order = orderQueue.get(block=False)
-        order.displayOrder()
+        # order.displayOrder()
 
         responsedata = {
             'customerId': order.customerid,

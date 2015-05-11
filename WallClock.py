@@ -7,7 +7,7 @@ import logging
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
-
+start = time.time()
 app = Flask(__name__)
 
 
@@ -18,7 +18,7 @@ def show_description():
 
 @app.route('/wallclock', methods=['GET'])
 def get_wallclock_time():
-    return jsonify({'time': time.time()}), 200
+    return jsonify({'time': round(time.time() - start, 2)}), 200
 
 
 if __name__ == '__main__':
