@@ -6,7 +6,7 @@ import time
 from random import randint
 
 count = 1
-order=[["Shaken Sweet Tea", "Coffee1"], ["Coffee2"], ["Coffee3","Coffee4","Coffee5"],["Coffee6"],["Coffee7","Coffee8"],["Coffee9"],["Coffee10","Coffee11"]]
+order=[["Shaken Sweet Tea","Coffee1"],["Coffee2"],["Coffee3","Coffee4","Coffee5"],["Coffee6"],["Coffee7","Coffee8"],["Coffee9"],["Coffee10","Coffee11"]]
 
 def main_loop():
     while 1:
