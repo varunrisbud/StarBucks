@@ -1,7 +1,12 @@
 __author__ = 'Varun'
-from flask import Flask, jsonify
-import requests, json, time, random
+import json
+import time
+import random
 import logging
+
+from flask import Flask
+import requests
+
 
 app = Flask(__name__)
 
@@ -11,11 +16,10 @@ log.setLevel(logging.ERROR)
 
 def add_orders_for_Barista(custID, custName, custOrder):
     baristaQueueURL = 'http://localhost:3000/queue/orderqueue'
-    # payload = {"customerId": custID, "customerName": custName, "itemName": custOrder}
-    # print(payload)
-    # jsonPayload = jsonify({"customerId": custID, "customerName": custName, "itemName": custOrder})
     custheader = {'Content-Type': 'application/json'}
-    addOrder = requests.post(baristaQueueURL, data=json.dumps({"customerId": custID, "customerName": custName, "itemName": custOrder}), headers=custheader)
+    addOrder = requests.post(baristaQueueURL,
+                             data=json.dumps({"custId": custID, "customerName": custName, "itemName": custOrder}),
+                             headers=custheader)
 
 
 def get_customer_order(custID):
@@ -23,12 +27,10 @@ def get_customer_order(custID):
     provideCoffee = []
     addOrderToQueue = []
     custQrderURL = "http://localhost:4000/customer/" + str(custID)
-    # payload = {'custId': custID}
     custDetails = requests.get(custQrderURL).json()
     customerID = custDetails['custId']
     customerName = custDetails['customerName']
     customerOrder = custDetails['items']
-    # removed two print statments
 
     for i, order in enumerate(customerOrder):
         # print(order)
@@ -56,20 +58,17 @@ def get_customer_in_queue():
     if(queueResponse.status_code == requests.codes.ok):
         custQueueResponse = queueResponse.json()
         custID = custQueueResponse['id']
-        # print(custID)
         waitTime = random.randrange(2, 6)
         time.sleep(waitTime)
         print("{} Cashier: Hi, what can I get for you today!".format(get_time()))
         get_customer_order(custID)
     elif queueResponse.status_code == 204:
-        # print("Awaiting customers!!")
         time.sleep(random.randrange(2, 6))
 
 
 def get_time():
     wallClockURL = 'http://localhost:10001/wallclock'
     queueResponse = requests.get(wallClockURL).json()
-    # print("Printing time %s" %queueResponse['time'])
     return queueResponse['time']
 
 
@@ -77,4 +76,3 @@ print("Cashier Started")
 while(True):
     get_customer_in_queue()
     get_time()
-# get_customer_order(2)

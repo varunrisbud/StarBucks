@@ -2,7 +2,11 @@ __author__ = 'Akshay_Jarandikar'
 
 from random import randint
 import logging
-import requests, json, time
+import json
+import time
+
+import requests
+
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
@@ -20,7 +24,7 @@ while(True):
     response = requests.delete(custQueueUrl)
     if response.status_code == 200:
         r = response.json()
-        customerId = r['customerId']
+        customerId = r['custId']
         customerName = r['customerName']
         itemName = r['itemName']
 

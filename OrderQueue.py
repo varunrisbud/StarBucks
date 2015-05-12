@@ -1,11 +1,13 @@
-from flask import Flask
 import queue
+import logging
+
+from flask import Flask
 from flask import request
 from flask import jsonify
 from flask import json
 from flask import Response
 from Order import Order
-import logging
+
 
 app = Flask(__name__)
 
@@ -25,7 +27,7 @@ def queue_order():
 
         requestdatajson = request.get_json()
 
-        custid = requestdatajson['customerId']
+        custid = requestdatajson['custId']
         custname = requestdatajson['customerName']
         itemname = requestdatajson['itemName']
 
@@ -71,7 +73,7 @@ def deque_order():
         # order.displayOrder()
 
         responsedata = {
-            'customerId': order.customerid,
+            'custId': order.customerid,
             'customerName': order.customername,
             'itemName': order.itemname
         }

@@ -1,10 +1,11 @@
+import logging
+
 from flask import Flask, jsonify
 from flask import request
 from customer import Customer
 from utility import UtilityClass
-import json
 import requests
-import logging
+
 
 app = Flask(__name__)
 
@@ -17,7 +18,6 @@ util = UtilityClass()
 def get_time():
     wallClockURL = 'http://localhost:10001/wallclock'
     queueResponse = requests.get(wallClockURL).json()
-    # print("Printing time %s" %queueResponse['time'])
     return queueResponse['time']
 
 
@@ -26,7 +26,7 @@ def create_customer():
     if request.method == 'POST':
         cust=Customer(request.json['customerName'], request.json['custId'], request.json['items'])
         util.addCustomer(cust)
-        return jsonify({'status': 'customer successfully added'}), 200
+        return jsonify({'status': 'customer successfully added'}), 201
 
 
 @app.route('/customer/<int:custId>', methods=['GET'])
@@ -58,9 +58,7 @@ def delete_item(custId):
 
 def findCustomer(list, cid):
     for q in list:
-        # print(q)
         if q.id==cid:
-           # print(q.id)
             return q
     return None
 
