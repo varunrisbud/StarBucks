@@ -1,1 +1,1 @@
-start python "C:\Users\Sameer Ranade\Documents\GitHub\StarBucks\Barista.py"
+start python .\Barista.py
