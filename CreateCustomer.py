@@ -20,7 +20,7 @@ def main_loop():
         addcustomertoqueue = 'http://localhost:5000/addcustomer/%d' %count
         addcustomertoqueuerequest = requests.post(addcustomertoqueue)
         count += 1
-        time.sleep(0.1)
+        time.sleep(0.05)
 
 
 if __name__ == '__main__':

@@ -24,7 +24,7 @@ while(True):
         customerName = r['customerName']
         itemName = r['itemName']
 
-        time.sleep(randint(3, 6))
+        time.sleep(randint(4, 10))
         print("{} Barista: Hey {}, your {} is ready..".format(get_time(), customerName, itemName))
         # print("Barista: Thank you..")
         QueueUrl = "http://localhost:4000/customer/" + str(customerId)
